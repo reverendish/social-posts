@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Social Post Generator",
-  description: "Generate platform-specific social media captions for your business in seconds.",
+  title: "Late Payment Chaser",
+  description: "Generate professional debt chasing letters citing UK statutory rights under the Late Payment of Commercial Debts (Interest) Act 1998.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

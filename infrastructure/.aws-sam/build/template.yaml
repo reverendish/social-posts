@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    MemorySize: 256
+    Timeout: 30
+    Environment:
+      Variables:
+        BEDROCK_REGION: eu-west-2
+        ALLOWED_ORIGIN: https://latepayment.ishsitotombe.co.uk
+Resources:
+  GenerateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GenerateFunction
+      Handler: generate.handler
+      Policies:
+      - AmazonBedrockFullAccess
+      Events:
+        GeneratePost:
+          Type: HttpApi
+          Properties:
+            Path: /generate
+            Method: POST
+        GenerateOptions:
+          Type: HttpApi
+          Properties:
+            Path: /generate
+            Method: OPTIONS
+    Metadata:
+      SamResourceId: GenerateFunction
+Outputs:
+  LatePaymentApiUrl:
+    Description: API Gateway endpoint URL
+    Value:
+      Fn::Sub: https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/generate
